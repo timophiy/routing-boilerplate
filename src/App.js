@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Header from './components/Header/Header';
+import Drawer from './components/Drawer/Drawer';
 import './App.css';
 
 function App() {
+  const [isDrawerOpen, toggleDrawer] = useState(false);
+  const toggleDrawerHandler = () => toggleDrawer(!isDrawerOpen);
+
   return (
     <Router>
+      <Header toggleDrawer={toggleDrawerHandler} />
+      <Drawer
+        isOpen={isDrawerOpen}
+        onClose={toggleDrawerHandler}
+        onOpen={toggleDrawerHandler}
+      />
       <Switch>
         <Route path="/about">
           <About />
