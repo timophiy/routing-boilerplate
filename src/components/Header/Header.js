@@ -19,7 +19,7 @@ const Header = ({ toggleDrawer }) => (
       >
         <MenuIcon />
       </IconButton>
-      <Typography variant="h6">News</Typography>
+      <Typography variant="h6">Title</Typography>
       <Button color="inherit">Login</Button>
     </Toolbar>
   </AppBar>
