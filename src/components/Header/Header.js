@@ -5,10 +5,11 @@ import {
   IconButton,
   Typography,
   Button,
+  Switch,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 
-const Header = ({ toggleDrawer }) => (
+const Header = ({ toggleDrawer, isDarkMode, toggleDarkMode }) => (
   <AppBar position="static">
     <Toolbar>
       <IconButton
@@ -20,6 +21,13 @@ const Header = ({ toggleDrawer }) => (
         <MenuIcon />
       </IconButton>
       <Typography variant="h6">Title</Typography>
+      <Switch
+        checked={isDarkMode}
+        onChange={toggleDarkMode}
+        value="checkedB"
+        color="primary"
+        inputProps={{ 'aria-label': 'primary checkbox' }}
+      />
       <Button color="inherit">Login</Button>
     </Toolbar>
   </AppBar>

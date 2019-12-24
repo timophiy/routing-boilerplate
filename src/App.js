@@ -1,34 +1,40 @@
 import React, { useState } from 'react';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
 import darkTheme from './themes/dark';
 import lightTheme from './themes/light';
 import Header from './components/Header/Header';
 import Drawer from './components/Drawer/Drawer';
-import './App.css';
+
+const GlobalStyle = createGlobalStyle`
+  html, body {
+    height: 100%
+  }
+  body {
+    background-color: ${props => props.theme.colors.background};
+  }
+`;
 
 function App() {
   const [isDrawerOpen, toggleDrawer] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const toggleDrawerHandler = () => toggleDrawer(!isDrawerOpen);
+  const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
 
   return (
     <Router>
       <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
-        <Header toggleDrawer={toggleDrawerHandler} />
+        <GlobalStyle />
+        <Header
+          toggleDrawer={toggleDrawerHandler}
+          toggleDarkMode={toggleDarkMode}
+          isDarkMode={isDarkMode}
+        />
         <Drawer
           isOpen={isDrawerOpen}
           onClose={toggleDrawerHandler}
           onOpen={toggleDrawerHandler}
         />
-        <Button
-          onClick={() => {
-            setIsDarkMode(!isDarkMode);
-          }}
-        >
-          Toggle Dark Mode
-        </Button>
         <Switch>
           <Route path="/about">
             <About />
